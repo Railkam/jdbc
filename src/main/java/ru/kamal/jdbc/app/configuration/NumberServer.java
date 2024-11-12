@@ -64,7 +64,7 @@ public class NumberServer {
         return overlap;
     }
     public String GetNumber () throws IOException {
-        connection = new URL("http://localhost:8090/dateNumber").openConnection();
+        connection = new URL("http://localhost:8090/number").openConnection();
         in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String inputLine = in.readLine();
         in.close();
