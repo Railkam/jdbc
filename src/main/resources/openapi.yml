@@ -1,0 +1,174 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /order:
+    post:
+      tags:
+        - order-conrtoller
+      operationId: createOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int64
+  /order/{order_id}/detail:
+    post:
+      tags:
+        - detail-_order-controller
+      operationId: createDetail_order
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Detail_order'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int64
+  /order/{id}:
+    get:
+      tags:
+        - order-conrtoller
+      operationId: getOrderById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Order'
+  /order/{date_order}/{sum_order}:
+    get:
+      tags:
+        - order-conrtoller
+      operationId: getOrderByDateAndSum
+      parameters:
+        - name: date_order
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: sum_order
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+  /order/{date_orderStart}/{date_orderEnd}/{detail_orderName}:
+    get:
+      tags:
+        - order-conrtoller
+      operationId: getOrderByDateAndSum_1
+      parameters:
+        - name: date_orderStart
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: date_orderEnd
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: detail_orderName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        number_order:
+          type: string
+        sum_order:
+          type: integer
+          format: int64
+        date_order:
+          type: string
+          format: date
+        customer:
+          type: string
+        adress:
+          type: string
+        payment_type:
+          type: string
+        delivery_type:
+          type: string
+    Detail_order:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        article:
+          type: string
+        name:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+        sum:
+          type: integer
+          format: int64
+        order_id:
+          type: integer
+          format: int64
